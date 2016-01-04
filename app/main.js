@@ -36,5 +36,5 @@ loop.start();
 // ##
 // ON RESIZE
 window.addEventListener( "resize", () => {
-	webgl._binds.onResize();
+  webgl._binds.onResize();
 }, false );

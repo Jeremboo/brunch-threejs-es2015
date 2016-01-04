@@ -1,5 +1,3 @@
-'use strict';
-
 class Loop {
 
   constructor() {
@@ -9,19 +7,19 @@ class Loop {
     this._listeners = [];
 
     this._binds = {};
-    this._binds.update = this._update.bind( this );
+    this._binds.update = this._update.bind(this);
   }
 
   _update() {
     let listener = null;
     let i = this._count;
-    while( --i >= 0 ) {
-      listener = this._listeners[ i ];
-      if( listener ) {
-        listener.apply( this, null );
+    while (--i >= 0) {
+      listener = this._listeners[i];
+      if (listener) {
+        listener.apply(this, null);
       }
     }
-    this._idRAF = requestAnimationFrame( this._binds.update );
+    this._idRAF = requestAnimationFrame(this._binds.update);
   }
 
   start() {
@@ -29,27 +27,26 @@ class Loop {
   }
 
   stop() {
-    cancelAnimationFrame( this._idRAF );
+    cancelAnimationFrame(this._idRAF);
   }
 
-  add( listener ) {
-    const idx = this._listeners.indexOf( listener );
-    if( idx >= 0 ) {
+  add(listener) {
+    const idx = this._listeners.indexOf(listener);
+    if (idx >= 0) {
       return;
     }
-    this._listeners.push( listener );
+    this._listeners.push(listener);
     this._count++;
   }
 
-  remove( listener ) {
-    const idx = this._listeners.indexOf( listener );
-    if( idx < 0 ) {
+  remove(listener) {
+    const idx = this._listeners.indexOf(listener);
+    if (idx < 0) {
       return;
     }
-    this._listeners.splice( idx, 1 );
+    this._listeners.splice(idx, 1);
     this._count--;
   }
-
 }
 
 module.exports = new Loop();
