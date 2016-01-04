@@ -1,40 +1,40 @@
 import props from 'js/core/props';
 
+import exempleVert from '../shaders/exemple-vert';
+import exempleFrag from '../shaders/exemple-frag';
+
 class Exemple extends THREE.Object3D {
-	constructor(){
-		super();
+  constructor() {
+    super();
 
-		// ##
-		// INIT
-		// -- material
-		this.material = new THREE.MeshLambertMaterial( { color: 0xdddddd, shading: THREE.FlatShading } );		
-		// -- exemple of three object
-		this.exempleGeometry = new THREE.BoxGeometry( 1, 1, 1 );
-		this.exempleMesh = new THREE.Mesh( this.exempleGeometry, this.material );
-		
-		// ##
-		// SAVE BINDING
-		this._binds = {};
-		this._binds.onUpdate = this._onUpdate.bind(this);
-	}
+    // ##
+    // INIT
+    // - color
+    // - materials
+    // const exempleMaterial = new THREE.MeshLambertMaterial( { color: 0xdddddd, shading: THREE.FlatShading } );
+    const exempleShaderMaterial = new THREE.ShaderMaterial({
+      uniforms: {
+       color: { type: 'v4', value: new THREE.Vector4(0.3, 0.8, 0.4, 1)},
+      },
+      vertexShader: exempleVert,
+      fragmentShader: exempleFrag,
+      wireframe : true
+    });
+    // - object
+    const exempleGeometry = new THREE.BoxGeometry(1, 1, 1);
+    // - CREATE MESH
+    this.exempleMesh = new THREE.Mesh(exempleGeometry, exempleShaderMaterial);
 
-	_onUpdate() {
-		this.exempleMesh.rotation.x += props.rotation;
-		this.exempleMesh.rotation.y += props.rotation;
-	}
+    // ##
+    // SAVE BINDING
+    this._binds = {};
+    this._binds.onUpdate = this._onUpdate.bind(this);
+  }
 
-	/*createShaderMaterial() {
-		let shaderName = shaderToon["shaderName"];
-		let u = THREE.UniformsUtils.clone(shaderName.uniforms);
-		let vs = shaderName.vertexShader;
-		let fs = shaderName.fragmentShader;
-
-		let material = new THREE.ShaderMaterial({ uniforms: u, vertexShader: vs, fragmentShader: fs });
-		material.uniforms.uDirLightPos.value = light.position;
-		material.uniforms.uDirLightColor.value = light.color;
-
-		return material;
-	}*/
+  _onUpdate() {
+    this.exempleMesh.rotation.x += props.rotation;
+    this.exempleMesh.rotation.y += props.rotation;
+  }
 }
 
 module.exports = Exemple;

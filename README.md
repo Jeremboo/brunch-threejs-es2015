@@ -35,6 +35,8 @@ This is brunch skeleton for starting a project in **WebGL** with [Three.js](http
 
   * You can use this dir `/app/js/components/` for placed your THREE.object3D components. For my part, I create one component for each 3D objet. There is an example of object 3D in this dir (`Exemple.js`) for showing you how can you create a THREE.object3D with ES6.
 
+  * `/app/js/shaders` contains each fragments and vertices `.glsl` files. If you need to use a couple of `.glsl` file for build a `ShaderMaterial`, you just need to import this files. Look at `Exemple.js` for more details.
+
   * This directory `/app/js/core/` contain the classes of setting :
       * `Webgl.js` initializes the 3D scene and the camera.
       * `Loop.js` allows to manage the frame animation for each update of 3Dobjects.
