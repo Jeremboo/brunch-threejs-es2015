@@ -26,14 +26,18 @@ class Exemple extends THREE.Object3D {
     this.exempleMesh = new THREE.Mesh(exempleGeometry, exempleShaderMaterial);
 
     // ##
+    // ADD TO EXEMPLE OBJECT
+    this.add(this.exempleMesh);
+
+    // ##
     // SAVE BINDING
     this._binds = {};
     this._binds.onUpdate = this._onUpdate.bind(this);
   }
 
   _onUpdate() {
-    this.exempleMesh.rotation.x += props.rotation;
-    this.exempleMesh.rotation.y += props.rotation;
+    this.rotation.x += props.rotation;
+    this.rotation.y += props.rotation;
   }
 }
 

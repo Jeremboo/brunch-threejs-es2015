@@ -2,7 +2,7 @@
   "name": "brunch-threejs-es6",
   "description": "Brunch skeleton for beginning a three.js project.",
   "author": "Jérémie Boulay",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/Jeremboo/brunch-threejs-es6"

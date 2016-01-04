@@ -25,7 +25,7 @@ webgl.add(light);
 // ##
 // EXEMPLE BOX
 let exemple = new Exemple();
-webgl.add(exemple.exempleMesh)
+webgl.add(exemple)
 loop.add(exemple._binds.onUpdate);
 
 // ##
