@@ -9,14 +9,13 @@ This is brunch skeleton for starting a project in **WebGL** with [Three.js](http
 * Install (if you don't have them):
   * [Node.js](http://nodejs.org): `brew install node` on OS X
   * [Brunch](http://brunch.io): `npm install -g brunch`
-  * [Bower](http://bower.io): `npm install -g bower`
 * Create a new project :
   * Deploy with brunch :
     * `brunch new myapp --skeleton https://github.com/Jeremboo/brunch-threejs-es6` - create new project
   * Or use git to clone the brunch-threejs-es6 repository :
     * `git clone https://github.com/Jeremboo/brunch-threejs-es6`
 * Download dependencies :
-    * `npm run deploy` or `npm install & bower install`
+    * `npm run deploy` or `npm install && npm start`
 
 
 ## How to use

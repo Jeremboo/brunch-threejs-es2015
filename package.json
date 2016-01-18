@@ -9,10 +9,13 @@
   },
   "scripts": {
     "start": "brunch watch --server",
-    "deploy": "npm install && bower install && npm start",
+    "deploy": "npm install && npm start",
     "prod": "rm -r public/ && brunch build --production"
   },
-  "dependencies": {},
+  "dependencies": {
+    "dat.gui": "^0.6.1",
+    "three.js": "^0.73.2"
+  },
   "devDependencies": {
     "auto-reload-brunch": ">= 1.0 < 1.9",
     "babel-brunch": "^5.1.2",
