@@ -17,9 +17,9 @@ class Webgl {
     this.renderer.setClearColor(0x0c171a);
     this.dom = this.renderer.domElement;
 
-    this.usePostprocessing = true;
-    this.composer = new WAGNER.Composer(this.renderer);
-    this.composer.setSize(this.width, this.height);
+    this.usePostprocessing = false;
+    // this.composer = new WAGNER.Composer(this.renderer);
+    // this.composer.setSize(this.width, this.height);
     this.initPostprocessing();
 
     this._binds = {};

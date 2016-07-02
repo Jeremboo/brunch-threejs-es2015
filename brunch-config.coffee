@@ -7,6 +7,7 @@ exports.config =
       joinTo: 'app.css'
     templates:
       joinTo: 'app.js'
-
   npm:
-    enabled: true
+    globals:
+      THREE: 'three'
+      dat: 'dat-gui'
