@@ -1,71 +1,61 @@
-import props from 'js/core/props';
-
-class Webgl {
-  constructor( ){
-    this.width = window.innerWidth;
-    this.height = window.innerHeight;
-
+export default class Webgl {
+  constructor(w, h) {
     this.scene = new THREE.Scene();
 
-    this.camera = new THREE.PerspectiveCamera(50, 0, 1, 1000);
+    this.camera = new THREE.PerspectiveCamera(50, w / h, 1, 1000);
     this.camera.position.z = 10;
 
-    this.renderer = new THREE.WebGLRenderer({
-      antialias : true
+    this._renderer = new THREE.WebGLRenderer({
+      antialias: true,
     });
-    this.renderer.setPixelRatio( window.devicePixelRatio );
-    this.renderer.setClearColor(0x0c171a);
-    this.dom = this.renderer.domElement;
+    this._renderer.setPixelRatio(window.devicePixelRatio);
+    this._renderer.setClearColor(0x0c171a);
+    this.dom = this._renderer.domElement;
 
     this.usePostprocessing = false;
-    // this.composer = new WAGNER.Composer(this.renderer);
-    // this.composer.setSize(this.width, this.height);
+    this._composer = false;
+    this._passes = {};
     this.initPostprocessing();
+    this.onResize(w, h);
 
-    this._binds = {};
-    this._binds.onUpdate = this._onUpdate.bind( this );
-    this._binds.onResize = this._onResize.bind( this );
-  }
-
-  init() {
-    window.addEventListener( "orientationchange", this._binds.onResize, false );
-    this._onResize();
+    this.onUpdate = this.onUpdate.bind(this);
+    this.onResize = this.onResize.bind(this);
   }
 
   initPostprocessing() {
     if (!this.usePostprocessing) return;
-    this.vignettePass = new WAGNER.VignettePass();
-    this.fxaaPass = new WAGNER.FXAAPass();
+    // TODO add WAGNER
+    this._composer = new WAGNER.Composer(this._renderer);
+    this._composer.setSize(this.width, this.height);
+    this._passes.vignettePass = new WAGNER.VignettePass();
+    this._passes.fxaaPass = new WAGNER.FXAAPass();
   }
 
   add(mesh) {
     this.scene.add(mesh);
   }
 
-  _onUpdate() {
+  onUpdate() {
     if (this.usePostprocessing) {
-      this.composer.reset();
-      this.composer.renderer.clear();
-      this.composer.render(this.scene, this.camera);
-      this.composer.pass(this.fxaaPass);
-      this.composer.pass(this.vignettePass);
-      this.composer.toScreen();
+      this._composer.reset();
+      this._composer.renderer.clear();
+      this._composer.render(this.scene, this.camera);
+      // TODO loop to passes
+      this._composer.pass(this._passes.fxaaPass);
+      this._composer.pass(this._passes.vignettePass);
+      this._composer.toScreen();
     } else {
-      this.renderer.autoClear = false;
-      this.renderer.clear();
-      this.renderer.render(this.scene, this.camera);
+      this._renderer.render(this.scene, this.camera);
     }
   }
 
-  _onResize() {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
+  onResize(w, h) {
+    this.width = w;
+    this.height = h;
 
-    this.camera.aspect = width / height;
+    this.camera.aspect = w / h;
     this.camera.updateProjectionMatrix();
 
-    this.renderer.setSize(width, height);
+    this._renderer.setSize(w, h);
   }
 }
-
-module.exports = new Webgl();

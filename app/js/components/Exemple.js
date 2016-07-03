@@ -9,16 +9,19 @@ class Exemple extends THREE.Object3D {
 
     // ##
     // INIT
-    // - color
-    // - materials
-    // const exempleMaterial = new THREE.MeshLambertMaterial( { color: 0xdddddd, shading: THREE.FlatShading } );
+    // const exempleMaterial = new THREE.MeshLambertMaterial({
+    //   color: 0xdddddd,
+    //   shading: THREE.FlatShading,
+    // });
     const exempleShaderMaterial = new THREE.ShaderMaterial({
       uniforms: {
-       color: { type: 'v4', value: new THREE.Vector4(0.3, 0.8, 0.4, 1)},
+        color: {
+          type: 'v4',
+          value: new THREE.Vector4(0.9, 0.715, 0.072, 1) },
       },
       vertexShader: exempleVert,
       fragmentShader: exempleFrag,
-      wireframe : true
+      wireframe: true,
     });
     // - object
     const exempleGeometry = new THREE.BoxGeometry(1, 1, 1);
@@ -31,11 +34,10 @@ class Exemple extends THREE.Object3D {
 
     // ##
     // SAVE BINDING
-    this._binds = {};
-    this._binds.onUpdate = this._onUpdate.bind(this);
+    this.onUpdate = this.onUpdate.bind(this);
   }
 
-  _onUpdate() {
+  onUpdate() {
     this.rotation.x += props.rotation;
     this.rotation.y += props.rotation;
   }

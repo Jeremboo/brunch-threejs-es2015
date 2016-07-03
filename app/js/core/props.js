@@ -1,5 +1,5 @@
-var props = {
-  rotation : 0.05
-}
+const props = {
+  rotation: 0.05,
+};
 
 module.exports = props;

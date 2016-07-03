@@ -1,7 +1,7 @@
 # Brunch app
 
 
-This is brunch skeleton for starting a project in **WebGL** with [Three.js](http://threejs.org/),  [ES6](http://es6-features.org) and [WAGNER](https://github.com/spite/Wagner).
+This is brunch skeleton for starting a project in **WebGL** with [Three.js](http://threejs.org/),  [ES2015](http://es6-features.org) and [WAGNER](https://github.com/spite/Wagner).
 
 
 ## Getting started

@@ -1,4 +1,4 @@
-import webgl from 'js/core/Webgl';
+import Webgl from 'js/core/Webgl';
 import loop from 'js/core/Loop';
 import props from 'js/core/props';
 import Exemple from 'js/components/Exemple';
@@ -6,27 +6,28 @@ import Exemple from 'js/components/Exemple';
 
 // ##
 // INIT
-webgl.init();
-document.body.appendChild( webgl.dom );
+const webgl = new Webgl(window.innerWidth, window.innerHeight);
+document.body.appendChild(webgl.dom);
 // - Add object update to loop
-loop.add(webgl._binds.onUpdate);
+loop.add(webgl.onUpdate);
 
 // ##
 // GUI
-let gui = new dat.GUI();
+const gui = new dat.GUI();
 gui.add(props, 'rotation', 0.01, 1);
 gui.close();
 
 // ##
 // EXEMPLE LIGHT
-let light = new THREE.DirectionalLight( 0xffffff, 0.5 );
+const light = new THREE.DirectionalLight(0xffffff, 0.5);
 light.position.set(1, 1, 1);
 webgl.add(light);
+
 // ##
 // EXEMPLE BOX
-let exemple = new Exemple();
-webgl.add(exemple)
-loop.add(exemple._binds.onUpdate);
+const exemple = new Exemple();
+webgl.add(exemple);
+loop.add(exemple.onUpdate);
 
 // ##
 // RENDERER
@@ -34,7 +35,13 @@ loop.start();
 
 
 // ##
-// ON RESIZE
-window.addEventListener( "resize", () => {
-  webgl._binds.onResize();
-}, false );
+// ON RESIZE / ORIENTATION CHANGE
+function onResize() {
+  const w = window.innerWidth;
+  const h = window.innerHeight;
+
+  webgl.onResize(w, h);
+}
+
+window.addEventListener('resize', onResize);
+window.addEventListener('orientationchange', onResize);
