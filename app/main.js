@@ -1,7 +1,7 @@
 import Webgl from 'js/core/Webgl';
 import loop from 'js/core/Loop';
 import props from 'js/core/props';
-import Exemple from 'js/components/Exemple';
+import Example from 'js/components/Example';
 
 
 // ##
@@ -18,16 +18,16 @@ gui.add(props, 'rotation', 0.01, 1);
 gui.close();
 
 // ##
-// EXEMPLE LIGHT
+// EXAMPLE LIGHT
 const light = new THREE.DirectionalLight(0xffffff, 0.5);
 light.position.set(1, 1, 1);
 webgl.add(light);
 
 // ##
-// EXEMPLE BOX
-const exemple = new Exemple();
-webgl.add(exemple);
-loop.add(exemple.onUpdate);
+// EXAMPLE BOX
+const example = new Example();
+webgl.add(example);
+loop.add(example.onUpdate);
 
 // ##
 // RENDERER
